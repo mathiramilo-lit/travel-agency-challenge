@@ -4,19 +4,31 @@ declare(strict_types=1);
 
 namespace Lightit\Backoffice\Cities\Domain\Actions;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Lightit\Backoffice\Cities\App\Request\ListCitiesRequest;
 use Lightit\Backoffice\Cities\Domain\Models\City;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ListCitiesAction
 {
     /**
-     * @return Collection<int, Model>
+     * @return LengthAwarePaginator<City>
      */
-    public function execute(): Collection
+    public function execute(ListCitiesRequest $request): LengthAwarePaginator
     {
-        return QueryBuilder::for(City::class)
-            ->get();
+        $pageSize = (int) $request->query('page_size', '10');
+        $sortBy = is_string($request->query('sort_by')) ? $request->query('sort_by') : 'id';
+        $order = $request->query('order');
+
+        if (! is_string($order) || ! in_array(strtolower($order), ['asc', 'desc'], true)) {
+            $order = 'asc';
+        }
+
+        /** @var LengthAwarePaginator<City> $paginator */
+        $paginator = QueryBuilder::for(City::class)
+            ->orderBy($sortBy, $order)
+            ->paginate($pageSize);
+
+        return $paginator;
     }
 }
