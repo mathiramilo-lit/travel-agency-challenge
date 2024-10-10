@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Factories\AirlineFactory;
+use Database\Factories\CityFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
@@ -21,5 +24,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        CityFactory::new()->count(50)->create();
+        AirlineFactory::new()->count(20)->create();
     }
 }
