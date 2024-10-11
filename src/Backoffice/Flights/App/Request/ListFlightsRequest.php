@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Lightit\Backoffice\Airlines\App\Request;
+namespace Lightit\Backoffice\Flights\App\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Lightit\Backoffice\Airlines\Domain\DataTransferObjects\AirlineFilterDto;
+use Lightit\Backoffice\Flights\Domain\DataTransferObjects\FlightFilterDto;
 
-class ListAirlinesRequest extends FormRequest
+class ListFlightsRequest extends FormRequest
 {
     public const PAGE_SIZE = 'page_size';
 
@@ -22,12 +22,12 @@ class ListAirlinesRequest extends FormRequest
     {
         return [
             self::PAGE_SIZE => ['nullable', 'integer', 'min:1', 'max:50'],
-            self::SORT_BY => ['nullable', 'in:id,name,description,updated_at,created_at'],
+            self::SORT_BY => ['nullable', 'in:id,departure_time,arrival_time,updated_at,created_at'],
             self::ORDER => ['nullable', 'in:asc,desc'],
         ];
     }
 
-    public function toDto(): AirlineFilterDto
+    public function toDto(): FlightFilterDto
     {
         $pageSize = is_numeric($this->input(self::PAGE_SIZE)) ? (int) $this->input(self::PAGE_SIZE) : 10;
         $sortBy = is_string($this->input(self::SORT_BY)) ? $this->input(self::SORT_BY) : 'id';
@@ -37,7 +37,7 @@ class ListAirlinesRequest extends FormRequest
             $order = 'asc';
         }
 
-        return new AirlineFilterDto(
+        return new FlightFilterDto(
             pageSize: $pageSize,
             sortBy: $sortBy,
             order: $order,

@@ -78,6 +78,7 @@ class ExceptionHandler
                 if (is_callable($target)) {
                     $target($exception);
                 }
+
                 throw new $target();
             }
         }

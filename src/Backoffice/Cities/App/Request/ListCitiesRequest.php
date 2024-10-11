@@ -10,7 +10,9 @@ use Lightit\Backoffice\Cities\Domain\DataTransferObjects\CityFilterDto;
 class ListCitiesRequest extends FormRequest
 {
     public const PAGE_SIZE = 'page_size';
+
     public const SORT_BY = 'sort_by';
+
     public const ORDER = 'order';
 
     /**
