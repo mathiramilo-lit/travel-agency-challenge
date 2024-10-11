@@ -15,7 +15,7 @@ class ListCitiesController
         ListCitiesRequest $request,
         ListCitiesAction $action,
     ): JsonResponse {
-        $cities = $action->execute($request);
+        $cities = $action->execute($request->toDto());
 
         return responder()
             ->success($cities, CityTransformer::class)

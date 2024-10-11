@@ -15,7 +15,7 @@ class ListAirlinesController
         ListAirlinesRequest $request,
         ListAirlinesAction $action,
     ): JsonResponse {
-        $airlines = $action->execute($request);
+        $airlines = $action->execute($request->toDto());
 
         return responder()
             ->success($airlines, AirlineTransformer::class)

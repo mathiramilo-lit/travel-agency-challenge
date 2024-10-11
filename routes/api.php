@@ -55,10 +55,13 @@ Route::prefix('cities')
     ->middleware([])
     ->group(static function () {
         Route::get('/', ListCitiesController::class);
-        Route::get('/{city}', GetCityController::class)->withTrashed();
         Route::post('/', StoreCityController::class);
-        Route::put('/{city}', UpdateCityController::class);
-        Route::delete('/{city}', DeleteCityController::class);
+        Route::prefix('/{city}')
+            ->group(function () {
+                Route::get('/', GetCityController::class);
+                Route::put('/', UpdateCityController::class);
+                Route::delete('/', DeleteCityController::class);
+            });
     });
 
 /*
@@ -70,8 +73,11 @@ Route::prefix('airlines')
     ->middleware([])
     ->group(static function () {
         Route::get('/', ListAirlinesController::class);
-        Route::get('/{airline}', GetAirlineController::class)->withTrashed();
         Route::post('/', StoreAirlineController::class);
-        Route::put('/{airline}', UpdateAirlineController::class);
-        Route::delete('/{airline}', DeleteAirlineController::class);
+        Route::prefix('/{airline}')
+            ->group(function () {
+                Route::get('/', GetAirlineController::class);
+                Route::put('/', UpdateAirlineController::class);
+                Route::delete('/', DeleteAirlineController::class);
+            });
     });
