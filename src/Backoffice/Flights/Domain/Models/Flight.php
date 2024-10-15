@@ -14,8 +14,8 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
  * @property int                             $airline_id
  * @property int                             $origin_city_id
  * @property int                             $destination_city_id
- * @property \Illuminate\Support\Carbon      $departure_time
- * @property \Illuminate\Support\Carbon      $arrival_time
+ * @property \Illuminate\Support\Carbon      $departure_at
+ * @property \Illuminate\Support\Carbon      $arrival_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read Airline                    $airline
@@ -26,13 +26,19 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
  * @method static \Illuminate\Database\Eloquent\Builder|Flight newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Flight query()
  * @method static \Illuminate\Database\Eloquent\Builder|Flight whereAirlineId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Flight whereArrivalTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flight whereArrivalAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Flight whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Flight whereDepartureTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flight whereDepartureAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Flight whereDestinationCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Flight whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Flight whereOriginCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Flight whereUpdatedAt($value)
+ *
+ * @property string $departure_at
+ * @property string $arrival_at
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Flight whereArrivalAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flight whereDepartureAt($value)
  *
  * @mixin \Eloquent
  */
@@ -41,13 +47,11 @@ class Flight extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'departure_time' => 'datetime',
-        'arrival_time' => 'datetime',
+        'departure_at' => 'datetime',
+        'arrival_at' => 'datetime',
     ];
 
     /**
-     * Get the airline associated with the flight.
-     *
      * @return BelongsTo<Airline, Flight>
      */
     public function airline(): BelongsTo
@@ -56,8 +60,6 @@ class Flight extends Model
     }
 
     /**
-     * Get the origin city associated with the flight.
-     *
      * @return BelongsTo<City, Flight>
      */
     public function originCity(): BelongsTo
@@ -66,8 +68,6 @@ class Flight extends Model
     }
 
     /**
-     * Get the destination city associated with the flight.
-     *
      * @return BelongsTo<City, Flight>
      */
     public function destinationCity(): BelongsTo

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Lightit\Backoffice\Cities\Domain\DataTransferObjects;
 
-class CityDto
+readonly class CityDto
 {
     public function __construct(
-        private readonly string $name,
+        private string $name,
     ) {
     }
 

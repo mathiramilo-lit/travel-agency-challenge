@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Lightit\Backoffice\Airlines\Domain\Models\Airline;
-use Lightit\Backoffice\Cities\Domain\Models\City;
 use Lightit\Backoffice\Flights\Domain\Models\Flight;
 
 /**
@@ -23,24 +21,15 @@ class FlightFactory extends Factory
      */
     public function definition(): array
     {
-        $departureTime = fake()->dateTimeBetween('-1 year', '+1 year');
-        $arrivalTime = (clone $departureTime)->modify('+' . fake()->numberBetween(1, 48) . ' hours'); // Add 1 to 12 hours
-
-        /** @var Airline $airline */
-        $airline = AirlineFactory::new()->create();
-
-        /** @var City $originCity */
-        $originCity = CityFactory::new()->create();
-
-        /** @var City $destinationCity */
-        $destinationCity = CityFactory::new()->create();
+        $departureAt = fake()->dateTimeBetween('-1 year', '+1 year');
+        $arrivalAt = (clone $departureAt)->modify('+' . fake()->numberBetween(1, 48) . ' hours'); // Add 1 to 48 hours
 
         return [
-            'airline_id' => $airline->id,
-            'origin_city_id' => $originCity->id,
-            'destination_city_id' => $destinationCity->id,
-            'departure_time' => $departureTime,
-            'arrival_time' => $arrivalTime,
+            'airline_id' => AirlineFactory::new(),
+            'origin_city_id' => CityFactory::new(),
+            'destination_city_id' => CityFactory::new(),
+            'departure_at' => $departureAt,
+            'arrival_at' => $arrivalAt,
         ];
     }
 }

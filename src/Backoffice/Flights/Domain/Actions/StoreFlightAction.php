@@ -15,8 +15,8 @@ class StoreFlightAction
             'airline_id' => $flightDto->getAirlineId(),
             'origin_city_id' => $flightDto->getOriginCityId(),
             'destination_city_id' => $flightDto->getDestinationCityId(),
-            'departure_time' => $flightDto->getDepartureTime(),
-            'arrival_time' => $flightDto->getArrivalTime(),
+            'departure_at' => $flightDto->getDepartureAt(),
+            'arrival_at' => $flightDto->getArrivalAt(),
         ]);
 
         $flight->save();

@@ -25,18 +25,14 @@ return new class extends Migration
                 ->constrained('cities')
                 ->cascadeOnDelete();
 
-            $table->timestamp('departure_time');
-            $table->timestamp('arrival_time');
+            $table->timestamp('departure_at');
+            $table->timestamp('arrival_at');
             $table->timestamps();
         });
-
-        // Check departure_time < arrival_time
-        // DB::statement('ALTER TABLE flights ADD CONSTRAINT check_departure_before_arrival CHECK (departure_time < arrival_time)');
     }
 
     public function down(): void
     {
         Schema::dropIfExists('flights');
-        // DB::statement('ALTER TABLE flights DROP CONSTRAINT IF EXISTS check_departure_before_arrival');
     }
 };

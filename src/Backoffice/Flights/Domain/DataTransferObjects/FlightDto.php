@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace Lightit\Backoffice\Flights\Domain\DataTransferObjects;
 
 use Illuminate\Support\Carbon;
-use InvalidArgumentException;
 
-class FlightDto
+readonly class FlightDto
 {
     public function __construct(
-        private readonly int $airlineId,
-        private readonly int $originCityId,
-        private readonly int $destinationCityId,
-        private readonly Carbon $departureTime,
-        private readonly Carbon $arrivalTime,
+        private int $airlineId,
+        private int $originCityId,
+        private int $destinationCityId,
+        private Carbon $departureAt,
+        private Carbon $arrivalAt,
     ) {
-        if ($this->departureTime >= $this->arrivalTime) {
-            throw new InvalidArgumentException('Departure time must be earlier than arrival time.');
-        }
     }
 
     public function getAirlineId(): int
@@ -36,13 +32,13 @@ class FlightDto
         return $this->destinationCityId;
     }
 
-    public function getDepartureTime(): Carbon
+    public function getDepartureAt(): Carbon
     {
-        return $this->departureTime;
+        return $this->departureAt;
     }
 
-    public function getArrivalTime(): Carbon
+    public function getArrivalAt(): Carbon
     {
-        return $this->arrivalTime;
+        return $this->arrivalAt;
     }
 }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Lightit\Backoffice\Airlines\Domain\DataTransferObjects;
 
-class AirlineDto
+readonly class AirlineDto
 {
     public function __construct(
-        private readonly string $name,
-        private readonly string $description,
+        private string $name,
+        private string $description,
     ) {
     }
 

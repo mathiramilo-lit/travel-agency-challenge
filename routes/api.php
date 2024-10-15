@@ -57,7 +57,6 @@ Route::prefix('users')
 |--------------------------------------------------------------------------
 */
 Route::prefix('cities')
-    ->middleware([])
     ->group(static function () {
         Route::get('/', ListCitiesController::class);
         Route::post('/', StoreCityController::class);
@@ -75,7 +74,6 @@ Route::prefix('cities')
 |--------------------------------------------------------------------------
 */
 Route::prefix('airlines')
-    ->middleware([])
     ->group(static function () {
         Route::get('/', ListAirlinesController::class);
         Route::post('/', StoreAirlineController::class);
@@ -93,7 +91,6 @@ Route::prefix('airlines')
 |--------------------------------------------------------------------------
 */
 Route::prefix('flights')
-    ->middleware([])
     ->group(static function () {
         Route::get('/', ListFlightsController::class);
         Route::post('/', StoreFlightController::class);

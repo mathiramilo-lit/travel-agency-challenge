@@ -30,6 +30,9 @@ use Lightit\Backoffice\Flights\Domain\Models\Flight;
  * @method static \Illuminate\Database\Eloquent\Builder|City whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|City whereUpdatedAt($value)
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Flight> $incomingFlights
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Flight> $outgoingFlights
+ *
  * @mixin \Eloquent
  */
 class City extends Model
@@ -47,7 +50,7 @@ class City extends Model
     /**
      * @return HasMany<Flight>
      */
-    public function outgoing_flights(): HasMany
+    public function outgoingFlights(): HasMany
     {
         return $this->hasMany(Flight::class, foreignKey: 'origin_city_id');
     }
@@ -55,7 +58,7 @@ class City extends Model
     /**
      * @return HasMany<Flight>
      */
-    public function incoming_flights(): HasMany
+    public function incomingFlights(): HasMany
     {
         return $this->hasMany(Flight::class, foreignKey: 'destination_city_id');
     }
