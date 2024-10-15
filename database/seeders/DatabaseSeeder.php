@@ -8,6 +8,7 @@ namespace Database\Seeders;
 
 use Database\Factories\AirlineFactory;
 use Database\Factories\CityFactory;
+use Database\Factories\FlightFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
@@ -18,14 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        UserFactory::new()->count(10)->create();
+        UserFactory::times(10)->create();
 
         // UserFactory::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
 
-        CityFactory::new()->count(50)->create();
-        AirlineFactory::new()->count(20)->create();
+        CityFactory::times(10)->create();
+        AirlineFactory::times(5)->create();
+        FlightFactory::times(50)->create();
     }
 }

@@ -18,6 +18,6 @@ class UpdateCityController
 
         return responder()
             ->success($updatedCity, CityTransformer::class)
-            ->respond(JsonResponse::HTTP_CREATED);
+            ->respond();
     }
 }

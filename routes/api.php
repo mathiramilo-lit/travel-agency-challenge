@@ -12,6 +12,11 @@ use Lightit\Backoffice\Cities\App\Controllers\GetCityController;
 use Lightit\Backoffice\Cities\App\Controllers\ListCitiesController;
 use Lightit\Backoffice\Cities\App\Controllers\StoreCityController;
 use Lightit\Backoffice\Cities\App\Controllers\UpdateCityController;
+use Lightit\Backoffice\Flights\App\Controllers\DeleteFlightController;
+use Lightit\Backoffice\Flights\App\Controllers\GetFlightController;
+use Lightit\Backoffice\Flights\App\Controllers\ListFlightsController;
+use Lightit\Backoffice\Flights\App\Controllers\StoreFlightController;
+use Lightit\Backoffice\Flights\App\Controllers\UpdateFlightController;
 use Lightit\Backoffice\Users\App\Controllers\DeleteUserController;
 use Lightit\Backoffice\Users\App\Controllers\GetUserController;
 use Lightit\Backoffice\Users\App\Controllers\ListUserController;
@@ -52,7 +57,6 @@ Route::prefix('users')
 |--------------------------------------------------------------------------
 */
 Route::prefix('cities')
-    ->middleware([])
     ->group(static function () {
         Route::get('/', ListCitiesController::class);
         Route::post('/', StoreCityController::class);
@@ -70,7 +74,6 @@ Route::prefix('cities')
 |--------------------------------------------------------------------------
 */
 Route::prefix('airlines')
-    ->middleware([])
     ->group(static function () {
         Route::get('/', ListAirlinesController::class);
         Route::post('/', StoreAirlineController::class);
@@ -79,5 +82,22 @@ Route::prefix('airlines')
                 Route::get('/', GetAirlineController::class);
                 Route::put('/', UpdateAirlineController::class);
                 Route::delete('/', DeleteAirlineController::class);
+            });
+    });
+
+/*
+|--------------------------------------------------------------------------
+| Flights Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('flights')
+    ->group(static function () {
+        Route::get('/', ListFlightsController::class);
+        Route::post('/', StoreFlightController::class);
+        Route::prefix('/{flight}')
+            ->group(function () {
+                Route::get('/', GetFlightController::class);
+                Route::put('/', UpdateFlightController::class);
+                Route::delete('/', DeleteFlightController::class);
             });
     });

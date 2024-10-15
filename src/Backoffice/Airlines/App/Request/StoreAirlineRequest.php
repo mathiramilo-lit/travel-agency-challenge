@@ -10,6 +10,7 @@ use Lightit\Backoffice\Airlines\Domain\DataTransferObjects\AirlineDto;
 class StoreAirlineRequest extends FormRequest
 {
     public const NAME = 'name';
+
     public const DESCRIPTION = 'description';
 
     /**
