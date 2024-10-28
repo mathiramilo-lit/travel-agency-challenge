@@ -44,7 +44,7 @@ use Lightit\Backoffice\Cities\Domain\Models\City;
  */
 class Flight extends Model
 {
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
         'departure_at' => 'datetime',

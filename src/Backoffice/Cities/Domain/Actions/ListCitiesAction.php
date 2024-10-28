@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Lightit\Backoffice\Cities\Domain\Actions;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use Lightit\Backoffice\Cities\Domain\Filters\CityAirlineFilter;
 use Lightit\Backoffice\Cities\Domain\Models\City;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ListCitiesAction
@@ -19,6 +21,7 @@ class ListCitiesAction
         $paginator = QueryBuilder::for(City::class)
             ->defaultSort('-id')
             ->allowedSorts('id', 'name')
+            ->allowedFilters([AllowedFilter::custom('airline', new CityAirlineFilter())])
             ->paginate();
 
         return $paginator;
