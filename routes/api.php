@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Lightit\Backoffice\Airlines\App\Controllers\AddCitiesController;
 use Lightit\Backoffice\Airlines\App\Controllers\DeleteAirlineController;
+use Lightit\Backoffice\Airlines\App\Controllers\DeleteCitiesController;
 use Lightit\Backoffice\Airlines\App\Controllers\GetAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\ListAirlinesController;
 use Lightit\Backoffice\Airlines\App\Controllers\StoreAirlineController;
@@ -82,6 +84,8 @@ Route::prefix('airlines')
                 Route::get('/', GetAirlineController::class);
                 Route::put('/', UpdateAirlineController::class);
                 Route::delete('/', DeleteAirlineController::class);
+                Route::post('/cities', AddCitiesController::class);
+                Route::delete('/cities', DeleteCitiesController::class);
             });
     });
 
