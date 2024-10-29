@@ -7,6 +7,7 @@ use Lightit\Backoffice\Airlines\App\Controllers\DeleteAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\DeleteCitiesController;
 use Lightit\Backoffice\Airlines\App\Controllers\GetAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\ListAirlinesController;
+use Lightit\Backoffice\Airlines\App\Controllers\ListAllowedCitiesController;
 use Lightit\Backoffice\Airlines\App\Controllers\StoreAirlineController;
 use Lightit\Backoffice\Airlines\App\Controllers\UpdateAirlineController;
 use Lightit\Backoffice\Cities\App\Controllers\DeleteCityController;
@@ -84,6 +85,7 @@ Route::prefix('airlines')
                 Route::get('/', GetAirlineController::class);
                 Route::put('/', UpdateAirlineController::class);
                 Route::delete('/', DeleteAirlineController::class);
+                Route::get('/cities', ListAllowedCitiesController::class);
                 Route::post('/cities', AddCitiesController::class);
                 Route::delete('/cities', DeleteCitiesController::class);
             });

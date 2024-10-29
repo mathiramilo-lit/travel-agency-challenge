@@ -33,14 +33,14 @@ class StoreFlightRequest extends FormRequest
                 'int',
                 'exists:cities,id',
                 Rule::exists('airline_city', 'city_id')
-                    ->where('airline_id', $this->input(self::AIRLINE_ID)),
+                    ->where('airline_id', (int) $this->input(self::AIRLINE_ID)),
             ],
             self::DESTINATION_CITY_ID => [
                 'required',
                 'int',
                 'exists:cities,id',
                 Rule::exists('airline_city', 'city_id')
-                    ->where('airline_id', $this->input(self::AIRLINE_ID)),
+                    ->where('airline_id', (int) $this->input(self::AIRLINE_ID)),
             ],
             self::DEPARTURE_AT => ['required', 'date'],
             self::ARRIVAL_AT => ['required', 'date', 'after:' . self::DEPARTURE_AT],
