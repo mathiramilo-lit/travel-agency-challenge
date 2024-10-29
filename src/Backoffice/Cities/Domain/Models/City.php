@@ -37,7 +37,7 @@ use Lightit\Backoffice\Flights\Domain\Models\Flight;
  */
 class City extends Model
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['id'];
 
     /**
      * @return BelongsToMany<Airline>
