@@ -6,6 +6,7 @@ namespace Lightit\Backoffice\Flights\App\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Lightit\Backoffice\Flights\Domain\DataTransferObjects\FlightDto;
 
 class StoreFlightRequest extends FormRequest
@@ -27,8 +28,20 @@ class StoreFlightRequest extends FormRequest
     {
         return [
             self::AIRLINE_ID => ['required', 'int', 'exists:airlines,id'],
-            self::ORIGIN_CITY_ID => ['required', 'int', 'exists:cities,id'],
-            self::DESTINATION_CITY_ID => ['required', 'int', 'exists:cities,id'],
+            self::ORIGIN_CITY_ID => [
+                'required',
+                'int',
+                'exists:cities,id',
+                Rule::exists('airline_city', 'city_id')
+                    ->where('airline_id', (int) $this->input(self::AIRLINE_ID)),
+            ],
+            self::DESTINATION_CITY_ID => [
+                'required',
+                'int',
+                'exists:cities,id',
+                Rule::exists('airline_city', 'city_id')
+                    ->where('airline_id', (int) $this->input(self::AIRLINE_ID)),
+            ],
             self::DEPARTURE_AT => ['required', 'date'],
             self::ARRIVAL_AT => ['required', 'date', 'after:' . self::DEPARTURE_AT],
         ];
