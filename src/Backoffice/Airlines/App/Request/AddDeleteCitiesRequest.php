@@ -24,8 +24,10 @@ class AddDeleteCitiesRequest extends FormRequest
 
     public function toDto(): AddDeleteCitiesDto
     {
+        $cities = (array) $this->input(self::CITIES);
+
         return new AddDeleteCitiesDto(
-            cities: (array) $this->input(self::CITIES),
+            cities: array_map(static fn($city) => (int) $city, $cities),
         );
     }
 }

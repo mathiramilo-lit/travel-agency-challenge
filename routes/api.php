@@ -85,9 +85,12 @@ Route::prefix('airlines')
                 Route::get('/', GetAirlineController::class);
                 Route::put('/', UpdateAirlineController::class);
                 Route::delete('/', DeleteAirlineController::class);
-                Route::get('/cities', ListAllowedCitiesController::class);
-                Route::post('/cities', AddCitiesController::class);
-                Route::delete('/cities', DeleteCitiesController::class);
+                Route::prefix('/cities')
+                    ->group(function () {
+                        Route::get('/', ListAllowedCitiesController::class);
+                        Route::post('/', AddCitiesController::class);
+                        Route::delete('/', DeleteCitiesController::class);
+                    });
             });
     });
 
